@@ -1,5 +1,6 @@
 import * as THREE from "./three.module.js";
 import { OrbitControls } from "./OrbitControls.js";
+import { VRButton } from "./VRButton.js";
 
 //Event
 window.addEventListener("resize", onWindowResize);
@@ -16,6 +17,11 @@ document.body.appendChild(renderer.domElement);
 
 //Control
 const controls = new OrbitControls(camera, renderer.domElement);
+
+//VR
+const vrButton = VRButton.createButton(renderer);
+document.body.appendChild(vrButton);
+renderer.xr.enabled = true;
 
 //Light
 const ambientLight = new THREE.AmbientLight(0xbda355);
@@ -43,7 +49,7 @@ const boxTexture = textureLoader.load("src/textures/crate.gif")
 const boxGeometry = new THREE.BoxGeometry(10, 10, 10);
 const boxMaterial = new THREE.MeshPhongMaterial({map: boxTexture});
 const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
-boxMesh.translateY(10);
+boxMesh.translateY(10).translateZ(-30);
 scene.add(boxMesh);
 
 //Cone
@@ -51,7 +57,7 @@ const coneTexture = textureLoader.load("src/textures/golfball.jpeg");
 const coneGeometry = new THREE.ConeGeometry(5, 20, 32);
 const coneMaterial = new THREE.MeshPhongMaterial({map: coneTexture});
 const coneMesh = new THREE.Mesh(coneGeometry, coneMaterial);
-coneMesh.translateX(-30).translateY(15);
+coneMesh.translateX(-30).translateY(15).translateZ(-30);
 scene.add(coneMesh);
 
 //Cylinder
@@ -59,7 +65,7 @@ const cylinderTexture = textureLoader.load("src/textures/brick_bump.jpeg");
 const cylinderGeometry = new THREE.CylinderGeometry(5, 5, 20, 32);
 const cylinderMaterial = new THREE.MeshPhongMaterial({map: cylinderTexture});
 const cylinderMesh = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
-cylinderMesh.translateX(25).translateY(15);
+cylinderMesh.translateX(25).translateY(15).translateZ(-30);
 scene.add(cylinderMesh);
 
 camera.translateZ(40).translateY(5);
