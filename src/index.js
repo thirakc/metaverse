@@ -1,6 +1,9 @@
 import * as THREE from "./three.module.js";
 import { OrbitControls } from "./OrbitControls.js";
 
+//Event
+window.addEventListener("resize", onWindowResize);
+
 //Setup
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x9fd4f5);
@@ -74,4 +77,10 @@ function animate() {
 
     controls.update();
     renderer.render(scene, camera);
+}
+
+function onWindowResize() {
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight)
 }
